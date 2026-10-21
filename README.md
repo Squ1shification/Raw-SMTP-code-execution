@@ -4,7 +4,7 @@
 
 OpenSMTPD 7.8.0p1 (Portable) contains a command-injection vulnerability that can result in unauthenticated remote code execution under specific MDA configurations.
 
-The issue is closely related to the command-injection vulnerability addressed by CVE-2020-7247. The primary problem is that OpenSMTPD's existing sanitization can be bypassed through functionality that is part of the documented MDA configuration language. In particular, the `:raw` token modifier can prevent the normal escaping performed during MDA variable expansion. In addition, several MDA environment variables are populated from envelope data and can subsequently reach a shell-based execution path.
+The issue is closely related to the command-injection vulnerability addressed by CVE-2020-7247. The primary problem is that OpenSMTPD's existing sanitization can be bypassed through functionality that is part of the documented MDA configuration language. In particular, the `:raw` token modifier can prevent the normal escaping performed during MDA variable expansion. In addition, several MDA environment variables are populated from envelope data and can subsequently reach a shell-based execution path. You can read about it in the published errata: https://ftp.openbsd.org/pub/OpenBSD/patches/7.9/common/015_smtpd.patch.sig
 
 The practical impact depends on the target's MDA configuration and the privileges of the process executing the delivery command. Where the vulnerable execution path is reachable, an unauthenticated SMTP client can influence command execution without requiring user interaction.
 
